@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/generate",
+      "schedule": "0 6 * * *"
+    }
+  ],
   "functions": {
     "api/**/*.ts": {
       "runtime": "@vercel/node@5.3.13"
