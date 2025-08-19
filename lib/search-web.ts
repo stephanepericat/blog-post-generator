@@ -4,6 +4,7 @@ export const braveSearch = async (query: string) => {
     extra_snippets: 'true',
     freshness: 'pd',
     q: query,
+    result_filter: 'web',
     summary: 'true',
   })
 

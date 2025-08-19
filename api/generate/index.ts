@@ -13,7 +13,9 @@ export async function GET(req: Request) {
   const data = isDev ? mockSearchResults : await braveSearch(query)
 
   // Sent to LLM for summarization
-  const article = isDev ? mockArticle.article : await writeArticle(data)
+  const article = isDev
+    ? mockArticle.article
+    : await writeArticle(data?.web?.results || [])
   const html = convertToHTML(article)
 
   // Post draft to Sanity

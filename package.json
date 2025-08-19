@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "local": "NODE_ENV=development vercel dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "settings": "vercel pull"
   },
   "keywords": [],
   "author": "",
@@ -25,8 +26,8 @@
     "node": ">=22.18.0"
   },
   "dependencies": {
-    "@ai-sdk/deepinfra": "^1.0.8",
-    "ai": "^5.0.15",
+    "@ai-sdk/deepinfra": "^1.0.10",
+    "ai": "^5.0.17",
     "markdown-it": "^14.1.0",
     "zod": "3.25.76"
   }
