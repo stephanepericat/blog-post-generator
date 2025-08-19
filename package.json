@@ -22,5 +22,10 @@
   },
   "engines": {
     "node": ">=22.18.0"
+  },
+  "dependencies": {
+    "@ai-sdk/deepinfra": "^1.0.8",
+    "ai": "^5.0.15",
+    "zod": "3.25.76"
   }
 }
