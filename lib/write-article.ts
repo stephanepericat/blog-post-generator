@@ -1,5 +1,7 @@
 import { generateText } from 'ai'
 import { deepinfra } from '@ai-sdk/deepinfra'
+import markdownit from 'markdown-it'
+
 import { systemPrompt2 } from './prompts.js'
 
 export const writeArticle = async (context: any) => {
@@ -17,4 +19,10 @@ export const writeArticle = async (context: any) => {
   })
 
   return text
+}
+
+export const convertToHTML = (markdown: string) => {
+  return markdownit({
+    breaks: true,
+  }).render(markdown)
 }
