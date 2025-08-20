@@ -17,7 +17,7 @@ export async function GET(req: Request) {
   const article = isDev
     ? mockArticle.article
     : await writeArticle(data?.web?.results || [])
-  const html = convertToHTML(article)
+  const html = await convertToHTML(article)
 
   // Post draft to Sanity
   const draft = await postDraft('test', html)

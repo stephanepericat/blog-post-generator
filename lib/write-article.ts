@@ -1,6 +1,12 @@
 import { generateText } from 'ai'
 import { deepinfra } from '@ai-sdk/deepinfra'
-import markdownit from 'markdown-it'
+import { marked } from 'marked'
+import { JSDOM } from 'jsdom'
+import createDOMPurify from 'dompurify'
+import type { WindowLike } from 'dompurify'
+
+const window = new JSDOM('').window as unknown as WindowLike
+const DOMPurify = createDOMPurify(window)
 
 import { systemPrompt2 } from './prompts.js'
 
@@ -21,8 +27,7 @@ export const writeArticle = async (context: any) => {
   return text
 }
 
-export const convertToHTML = (markdown: string) => {
-  return markdownit({
-    breaks: true,
-  }).render(markdown)
+export const convertToHTML = async (markdown: string) => {
+  const html = await marked(markdown)
+  return DOMPurify.sanitize(html)
 }
