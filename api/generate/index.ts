@@ -21,7 +21,8 @@ export async function GET(req: Request) {
 
   // Post draft to Sanity
   const html = await convertToHTML(article)
-  const draft = await postDraft('test', html)
+  const title = `The Daily Checkup: ${new Date().toLocaleDateString()}`
+  const draft = await postDraft(title, html)
 
   // Email draft to users
   const id = draft._id.split('.')[1]
