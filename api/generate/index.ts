@@ -18,14 +18,16 @@ export async function GET(req: Request) {
   const article = isDev
     ? mockArticle.article
     : await writeArticle(data?.web?.results || [])
-  const html = await convertToHTML(article)
 
   // Post draft to Sanity
+  const html = await convertToHTML(article)
   const draft = await postDraft('test', html)
-  const id = draft._id.split('.')[1]
-  const url = `https://cc-studio.vercel.app/preview/structure/blog;${id}`
 
   // Email draft to users
+  const id = draft._id.split('.')[1]
+  const { SANITY_DATASET } = process.env
+  const env = SANITY_DATASET === 'development' ? 'preview' : 'live'
+  const url = `https://cc-studio.vercel.app/${env}/structure/blog;${id}`
   const notification = await sendNotification(url)
 
   return new Response(JSON.stringify({ notification }), {
