@@ -1,5 +1,6 @@
 import { braveSearch } from '../../lib/search-web.js'
 import { convertToHTML, writeArticle } from '../../lib/write-article.js'
+import { postDraft } from '../../lib/post-draft.js'
 
 // mocks
 import mockArticle from '../../assets/article.js'
@@ -19,10 +20,11 @@ export async function GET(req: Request) {
   const html = convertToHTML(article)
 
   // Post draft to Sanity
+  const draft = await postDraft('test', html)
 
   // Email draft to users
 
-  return new Response(JSON.stringify({ html }), {
+  return new Response(JSON.stringify({ draft }), {
     headers: { 'Content-Type': 'application/json' },
   })
 }
